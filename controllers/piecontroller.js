@@ -2,6 +2,7 @@
 // const router = express.Router();
 const router = require('express').Router();
 const Pie = require('../db').import('../models/pie')
+const validateSession = require('../middleware/validate-session');
 
 
 // router.get('/', (req, res) => res.send('Pies are super great!!'));
@@ -15,7 +16,7 @@ router.get('/', (req, res) =>{
 })
 
 
-router.post('/', (req, res) => {
+router.post('/', validateSession, (req, res) => {
   const pieFromRequest = {
     nameOfPie: req.body.nameOfPie,
     baseOfPie: req.body.baseOfPie,
